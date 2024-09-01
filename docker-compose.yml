@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: table_d_db
+    image: postgres:15.2-alpine
+    restart: always
+    ports:
+      - "5632:5432"
+    environment:
+      POSTGRES_USER: table_user
+      POSTGRES_PASSWORD: table_todo
+      POSTGRES_DB: table_d_db
+      PGDATA: "/var/lib/postgresql/data/pgdata"

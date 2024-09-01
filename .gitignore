@@ -1,0 +1,18 @@
+/.venv/
+/.idea/
+/db.sqlite3
+
+
+# Environment & IDE
+.venv
+.idea
+
+# Python
+*.pyc
+__pycache__
+
+# Dev database
+db.sqlite
+
+# Local settings
+monitor/settings_local.py
