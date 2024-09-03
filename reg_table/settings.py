@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'app.todo_table',
     'app.users',
     'app.common',
+    'app.homepage'
 ]
 
 MIDDLEWARE = [
@@ -58,11 +60,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'reg_table.urls'
-
+templates_tag = ['users', 'todo_table', 'common', 'homepage']
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'app' / name / 'templates' for name in templates_tag],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,7 +112,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = []
+
+STATICFILES_DIRS = [BASE_DIR / 'app' / name / 'templates' for name in templates_tag]
 
 
 # Default primary key field type

@@ -1,0 +1,26 @@
+{% extends 'pattern.html' %}
+{% load static %}
+{% block title %}
+<link rel="stylesheet" href="{%static 'css/text.css'%}">
+{% endblock %}
+{% block content %}
+    <div class="d-flex flex-column aligin-items-end gap-4">
+        <div class="chefblock d-flex aligin-items-center flex-column border border-dark">
+            {% for object in object_list %}
+            <div>
+                <h1 class="h5">{{ object.topic }}</h1>
+            </div>
+            <div class="mt-2">
+                <h2 class="h5">{{ object.text_info }}</h3>
+            </div>
+            <div class="ms-auto">
+                <h4 class="h6">{{ object.data }}</h4>
+            </div>
+    
+            {% endfor %}
+        </div>
+        <a class="btn buttonfortext border border-dark fs-5 ms-auto">
+            Поддержать автора 
+        </a>
+    </div>
+{% endblock %}
