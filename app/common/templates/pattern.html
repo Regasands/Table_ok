@@ -18,7 +18,7 @@
         <nav class="nav p-3 d-flex align-items-center justify-content-between border border-dark fs-5 custom-text-bold">
             <a href='/' class="nav-brand nav-link link-dark ms-5">Table Reg</a>
             <a href="{% url 'teskshomepage' %}" class="nav-link link-dark">Tasks</a>
-            <a href="/" class="nav-link link-dark me-5">Profile</a>
+            <a href="{% url 'settingpage' %}" class="nav-link link-dark me-5">Profile</a>
         </nav>
     </header>
     {% block content %}

@@ -1,0 +1,29 @@
+{% extends 'pattern.html' %}
+{% load static%}
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/profile_setting.css'%}">
+{% endblock %}
+{% block content %}
+    <main class="d-flex gap-5 flex-column profile-setting mx-auto justify-content-center  align-items-center">
+        <div class="block-card">
+            <i class="bi bi-person"></i>
+            <a>Профиль</a>
+            <i class="bi bi-person"></i>
+        </div>
+        <div class="block-card">
+            <i class="bi bi-people"></i>
+            <a >Группы</a>
+            <i class="bi bi-people"></i>
+        </div>
+        <div class="block-card">
+            <i class="bi bi-gear"></i>
+            <a>Внешний вид</a>
+            <i class="bi bi-gear"></i>
+        </div>
+        <div class="block-card">
+            <i class="bi bi-hourglass"></i>
+            <a>Скоро выйдет</a>
+            <i class="bi bi-hourglass"></i>
+        </div>
+    </main>
+{% endblock %}
