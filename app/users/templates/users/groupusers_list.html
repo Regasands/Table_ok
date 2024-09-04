@@ -1,0 +1,22 @@
+{% extends 'pattern.html' %}
+{% load static %}
+{% block title %} 
+<link rel="stylesheet" href="{% static 'css/group_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="block-card">
+    {% for group in object_list %}
+        <div class='card custom-card'>
+            <div class="card-body">
+                <h5 class="card-title text-aligin-center">{{ group.name }}</h5>
+                <p class="h6 card-custom-text">{{ group.description }}</p>
+                {% if user == group.admin_user %}
+                    <a href="#" class="btn btn-primary card-button">Настройки группы</a>
+                {% else %}
+                    <a href="{% url 'delgroup' group.id %}" class="btn btn-danger card-button">Покинуть группу</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'app.todo_table',
     'app.users',
     'app.common',
-    'app.homepage'
+    'app.homepage',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -120,3 +122,9 @@ STATICFILES_DIRS = [BASE_DIR / 'app' / name / 'templates' for name in templates_
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'login'

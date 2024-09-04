@@ -1,0 +1,31 @@
+.custom-card{
+    width: 18rem;
+    height: 20rem;
+    padding: 1em;
+    border: solid 2px !important;
+
+}
+
+.block-card {
+    display: flex;
+    gap: 5em;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 10vh;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+}
+.card-button {
+    align-self: flex-end;
+    margin-top: auto;
+}
+.card-custom-text {
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis;
+    overflow-y: auto;
+}
