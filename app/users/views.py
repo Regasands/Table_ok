@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.urls  import reverse_lazy
 from app.users.models import GroupUsers
+from app.users.forms import UpdateFormsGroupUsers
 # Create your views here.
 
 
@@ -23,7 +24,7 @@ class ListGroupViews(ListView):
 class UpdateDelGroup(UpdateView):
     model = GroupUsers
     fields = []
-    # template_name = 'users/delgroup.html'
+    template_name = 'users/delgroup.html'
 
     def get_object(self, queryset=None):
         return GroupUsers.objects.get(pk=self.kwargs.get('pk'))
@@ -35,3 +36,9 @@ class UpdateDelGroup(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('listgroup')
+
+
+class UpdateAdminGroup(UpdateView):
+    model = GroupUsers
+    form_class = UpdateFormsGroupUsers
+    success_url = reverse_lazy('listgroup')

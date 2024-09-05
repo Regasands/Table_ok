@@ -1,0 +1,12 @@
+{% extends 'pattern.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div>
+        <button onclick='window.history.back()' type="button" class="btn btn-secondary">Назад</button>
+        <input type="submit" value="ДА, УВЕРЕН" class="btn btn-secondary">
+    </div>
+</form>
+{% endblock %}
