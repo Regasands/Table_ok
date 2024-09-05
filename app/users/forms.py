@@ -1,9 +1,10 @@
+from crispy_forms.layout import Layout, Row, Div, HTML, Submit, Button
+from crispy_forms.helper import FormHelper
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from crispy_forms.layout import Layout, Row, Div, HTML, Submit, Button
-from crispy_forms.helper import FormHelper
 from app.users.models import GroupUsers
+
 
 class UpdateFormsGroupUsers(forms.ModelForm):
     '''
@@ -54,7 +55,7 @@ class UpdateFormsGroupUsers(forms.ModelForm):
                 css_class='form_block'
             )
         )
-        
+
     def clean(self):
         cleaned_data = super().clean()
         admin_user = self.cleaned_data.get('admin_user')
