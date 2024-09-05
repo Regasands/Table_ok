@@ -1,0 +1,15 @@
+.custom-block {
+    margin-top: 10vh;
+    margin-left: 33vw;
+    margin-right: 33vw;
+    
+    padding: 2em;
+    border: solid 2px;
+    border-color: black;
+}
+.invite-block {
+    border: solid 1px;
+    width: 30vw;
+    border-color: black;
+    padding: 1em;
+}

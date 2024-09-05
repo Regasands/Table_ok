@@ -1,0 +1,21 @@
+{% extends 'pattern.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/invite_list.css'%}">
+{% endblock %}
+{% block content %}
+    <div class="d-flex gap-3 flex-column align-items-center custom-block">
+        {% if object_list %}
+            {% for invite in object_list %}
+                <div class="d-flex flex-row gap-5 invite-block">
+                    <a href="{% url 'acceptinvite' invite.pk%}" class="btn btn-dark me-auto">Принять</a>
+                    <h2 class="h5">{{ invite.group.name }}</h2>
+                    <a href="{% url 'reject' invite.pk %}" class="btn btn-dark ms-auto">Отклонить </a>
+                </div>
+            {% endfor %}
+        {% else %}
+        <h2 class="h5">Кажется, но у вас нет запросов </h2>
+        {% endif %}
+    </div>
+{% endblock %}

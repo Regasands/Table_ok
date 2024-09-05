@@ -1,10 +1,13 @@
 from django.urls import path
-from app.users.views import SettingPageViews, ListGroupViews, UpdateDelGroup, UpdateAdminGroup, ListUserPeofile
+from app.users.views import *
 
 urlpatterns = [
     path('', SettingPageViews.as_view(), name='settingpage'),
     path('group/', ListGroupViews.as_view(), name='listgroup'),
     path('group/delgroup/<int:pk>', UpdateDelGroup.as_view(), name='delgroup'),
     path('group/update/<int:pk>',  UpdateAdminGroup.as_view(), name='updategroup'),
-    path('profile/', ListUserPeofile.as_view(), name='profileuser')
+    path('profile/', ListUserPeofile.as_view(), name='profileuser'),
+    path('profile/invite', ListInviteViews.as_view(), name='invite'),
+    path('profile/invite/deleteaccept/<int:pk>', DelAndAcceptInviteView.as_view(), name='acceptinvite'),
+    path('profile/invite/deletereject/<int:pk>', DelAndAcceptInviteView.as_view(), name='reject'),
 ]

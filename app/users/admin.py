@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.users.models import GroupUsers
+from app.users.models import GroupUsers, InviteForGroup
 
 
 @admin.register(GroupUsers)
@@ -12,3 +12,5 @@ class GroupAdmin(admin.ModelAdmin):
     # Вы также можете настроить, какие поля будут отображаться на странице редактирования
     fields = ('name', 'description', 'admin_user', 'group_user')
 # Register your models here.
+
+admin.site.register(InviteForGroup)
