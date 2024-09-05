@@ -3,6 +3,9 @@ from django.views.generic import ListView, View
 
 from app.homepage.models import HomeNewsModel
 class HomePageViews(ListView):
+    '''
+    Отображение главной страницы 
+    '''
     model = HomeNewsModel
 
     def get_queryset(self):

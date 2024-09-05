@@ -6,6 +6,9 @@ from crispy_forms.helper import FormHelper
 from app.users.models import GroupUsers
 
 class UpdateFormsGroupUsers(forms.ModelForm):
+    '''
+    Обновление настроек группы
+    '''
     group_user = forms.ModelMultipleChoiceField(
         queryset=User.objects.all(),
         required=False,
@@ -51,6 +54,7 @@ class UpdateFormsGroupUsers(forms.ModelForm):
                 css_class='form_block'
             )
         )
+        
     def clean(self):
         cleaned_data = super().clean()
         admin_user = self.cleaned_data.get('admin_user')

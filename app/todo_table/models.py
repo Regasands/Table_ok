@@ -3,6 +3,9 @@ from app.users.models import GroupUsers
 
 
 class TeskModels(models.Model):
+    '''
+    Модель задания, плана 
+    '''
     class ChoiseColor:
         RED = 'red'
         BLUE = 'blue'
@@ -31,7 +34,9 @@ class TeskModels(models.Model):
 
 
 class TemaModels(models.Model):
-
+    '''
+    Тема для задания , объеденяет несколько заданий
+    '''
     name = models.CharField(verbose_name='Название темы', max_length=100)
     group = models.ForeignKey(GroupUsers, on_delete=models.CASCADE, verbose_name='Група  которая имеет эту тему')
     task = models.ManyToManyField(TeskModels, verbose_name='Задания относящиеся к этой теме ')

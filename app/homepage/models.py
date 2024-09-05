@@ -2,6 +2,9 @@ from django.db import models
 
 
 class HomeNewsModel(models.Model):
+    '''
+    Модель для  сообщений на главной странице
+    '''
     topic = models.CharField(verbose_name='Тема')
     text_info = models.TextField(verbose_name='Описание темы(текст)')
     data = models.DateField(auto_now_add=True, verbose_name='Дата создания темы')

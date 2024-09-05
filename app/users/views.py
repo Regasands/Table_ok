@@ -9,10 +9,17 @@ from app.users.forms import UpdateFormsGroupUsers
 
 
 class SettingPageViews(ListView):
+    '''
+    Главная страница настройек
+    '''
     model = GroupUsers
     template_name = 'profile.html'
 
+
 class ListGroupViews(ListView):
+    ''' 
+    Представление показывающее группы в которые добавлен пользователь 
+    '''
     model = GroupUsers
 
     def get_queryset(self):
@@ -22,6 +29,9 @@ class ListGroupViews(ListView):
 
 
 class UpdateDelGroup(UpdateView):
+    '''
+    Представление, чтобы удалить группу
+    '''
     model = GroupUsers
     fields = []
     template_name = 'users/delgroup.html'
@@ -32,6 +42,7 @@ class UpdateDelGroup(UpdateView):
     def form_valid(self , form):
         group = self.get_object()
         group.group_user.remove(self.request.user)
+
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -39,31 +50,43 @@ class UpdateDelGroup(UpdateView):
 
 
 class UpdateAdminGroup(UpdateView):
+    '''
+    Представление для обновления группы
+    '''
     model = GroupUsers
     form_class = UpdateFormsGroupUsers
     success_url = reverse_lazy('listgroup')
 
 
-class ListUserPeofile(ListView):
+class ListUserProfile(ListView):
+    '''
+    Представление  для просмотра  запросов пользователя, и для просмтра и настроек аккаунта 
+    '''
     model = GroupUsers
     template_name = 'users/profilelist.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.filter(group_user=self.request.user)
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         queryset = self.get_queryset()
+
         if queryset:
             context['len_group'] = len(queryset)
         else:
             context['len_group'] = 0
+
         return context
 
 
 class ListInviteViews(ListView):
+    '''
+    Представление для просотра приглашений в группу
+    '''
     model = InviteForGroup
 
     def get_queryset(self):
@@ -72,8 +95,12 @@ class ListInviteViews(ListView):
 
 
 class DelAndAcceptInviteView(DeleteView):
+    '''
+    Представление для принятия приглашения 
+    '''
     model = InviteForGroup
     success_url = reverse_lazy('invite')
+
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
     
@@ -81,14 +108,20 @@ class DelAndAcceptInviteView(DeleteView):
         self.object = self.get_object()
         group = self.object.group
         group.group_user.add(self.request.user)
+
         group.save()
         self.object.delete()
+
         return HttpResponseRedirect(self.success_url)
 
 
 class DelAndRejectInviteView(DeleteView):
+    '''
+    Представление для  откланения приглашения
+    '''
     model = InviteForGroup
     success_url = reverse_lazy('invite')
+
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
     

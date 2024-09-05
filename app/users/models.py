@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class GroupUsers(models.Model):
+    '''
+    Модель  группы пользователей, для  объединения  тем под одну группу 
+    '''
     group_user = models.ManyToManyField(User, verbose_name='Участники группы', related_name='user_group')
     name = models.CharField(verbose_name='Название группы', max_length=100)
     description = models.CharField(verbose_name='Описание группы', max_length=250)
@@ -17,6 +20,9 @@ class GroupUsers(models.Model):
 
 
 class InviteForGroup(models.Model):
+    '''
+    Приглашение для пользователя 
+    '''
     group = models.ForeignKey(GroupUsers, verbose_name='Группа в которую приглашают', related_name='group', on_delete=models.CASCADE)
     request_user = models.ForeignKey(User, verbose_name='Пользователь, которому отправили запрос', related_name='user', on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
