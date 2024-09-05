@@ -14,3 +14,16 @@ class GroupUsers(models.Model):
     class Meta:
         verbose_name = 'Группа Пользователей'
         verbose_name_plural = 'Группы Пользователей'
+
+
+class InviteForGroup(models.Model):
+    group = models.ForeignKey(GroupUsers, verbose_name='Группа в которую приглашают', related_name='group', on_delete=models.CASCADE)
+    request_user = models.ForeignKey(User, verbose_name='Пользователь, которому отправили запрос', related_name='user', on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.group.name}'
+
+    class Meta:
+        verbose_name = 'Приглашение в группу'
+        verbose_name_plural = 'Приглашения в группу'

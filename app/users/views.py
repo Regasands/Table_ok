@@ -42,3 +42,22 @@ class UpdateAdminGroup(UpdateView):
     model = GroupUsers
     form_class = UpdateFormsGroupUsers
     success_url = reverse_lazy('listgroup')
+
+
+class ListUserPeofile(ListView):
+    model = GroupUsers
+    template_name = 'users/profilelist.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(group_user=self.request.user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = self.get_queryset()
+        if queryset:
+            context['len_group'] = len(queryset)
+        else:
+            context['len_group'] = 0
+        return context

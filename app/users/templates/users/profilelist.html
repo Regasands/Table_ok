@@ -1,0 +1,21 @@
+{% extends 'pattern.html' %}
+{% load static %}
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/listusers_profile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="block_profile d-flex flex-column gap-4">
+        <i class="bi bi-mailbox ms-auto fs-3v email"><a href="/email"></a></i>
+        {% if user.user %}
+        <h2 class="h5">Имя пользователя: {{ user.name}}</h2>
+        {% else %}
+        <h2 class="h5">К сожалению у вас нет имени</h2>
+        {% endif %}
+        <h2 class="h5">Username: {{ user.username }}</h2>
+        <h2 class="h5">Количество групп: {{ len_group }}</h2>
+        <a href="" class="btn btn-dark">Редактировать профиль</a>
+        <a href="" class="btn btn-dark">Изменить пароль</a>
+    </div>
+</div>
+
+{% endblock %}

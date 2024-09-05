@@ -1,0 +1,15 @@
+.block_profile {
+    margin-left: auto;
+    margin-right: auto;
+    width: 20vw;
+    margin-top: 10vh;
+    padding: 3em;
+    border: solid 2px;
+    border-color: black;
+
+}
+.email{
+    margin-right: -1.8em;
+    margin-top: -2.4em;
+    transform: scale(2);
+}
