@@ -1,7 +1,7 @@
 from django.urls  import reverse_lazy
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, UpdateView, DeleteView
+from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from app.users.models import GroupUsers, InviteForGroup
 from app.users.forms import UpdateFormsGroupUsers
 
@@ -127,3 +127,8 @@ class DelAndRejectInviteView(DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return HttpResponseRedirect(self.success_url)
+
+
+class CreateInvite(CreateView):
+    model = InviteForGroup
+    

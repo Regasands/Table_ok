@@ -1,6 +1,8 @@
 from crispy_forms.layout import Layout, Row, Div, HTML, Submit, Button
 from crispy_forms.helper import FormHelper
 from django import forms
+from django.urls import Http404
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from app.users.models import GroupUsers
@@ -79,3 +81,43 @@ class UpdateFormsGroupUsers(forms.ModelForm):
         return instance
 
     
+class InviteForGroupForms(forms.Form):
+    username = forms.CharField(max_length=200)
+
+    def __init__(self, *args, **kwargs):
+        self.pk = kwargs.pop('pk', None)
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            Div(
+                Row('username'),
+                Row(
+                Row(
+                    Submit('submit', 'Отправить', css_class='col-2'),
+                    Button(
+                        'button',
+                        'Назад',
+                        css_class='btn btn-secondary col-2',
+                        onclick='window.history.back()'
+                        ),
+                    css_class='d-flex gap-4 mx-auto justify-content-center'
+                    ),
+                )
+            )
+        )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = self.cleaned_data.get('username')
+        if not username:
+            raise forms.ValidationError({'username': 'Введите имя пользователя.'})
+        try:
+            user = get_object_or_404(User, username=username)
+        except Http404:
+            raise forms.ValidationError({'username': 'Такого пользователя нет'})
+        
+        group = GroupUsers.objects.get(pk=self.pk).group_user
+        if user in group:
+            raise forms.ValidationError('Пользователь уже есть в этой группе')
+        return cleaned_data

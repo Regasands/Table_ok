@@ -11,7 +11,10 @@
                 <h5 class="card-title text-aligin-center">{{ group.name }}</h5>
                 <p class="h6 card-custom-text">{{ group.description }}</p>
                 {% if user == group.admin_user %}
-                    <a href="{% url 'updategroup' group.id %}" class="btn btn-primary card-button">Настройки группы</a>
+                    <div class="d-flex gap-2 justify-contnet-end mt-auto">
+                        <a href="{% url 'updategroup' group.id %}" class="btn btn-primary card-button">Настройки группы</a>
+                        <a href="{% url 'updategroup' group.id %}" class="btn btn-primary card-button">Добавить участника</a>
+                    </div>
                 {% else %}
                     <a href="{% url 'delgroup' group.id %}" class="btn btn-danger card-button">Покинуть группу</a>
                 {% endif %}
