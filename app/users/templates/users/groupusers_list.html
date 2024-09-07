@@ -13,7 +13,7 @@
                 {% if user == group.admin_user %}
                     <div class="d-flex gap-2 justify-contnet-end mt-auto">
                         <a href="{% url 'updategroup' group.id %}" class="btn btn-primary card-button">Настройки группы</a>
-                        <a href="{% url 'updategroup' group.id %}" class="btn btn-primary card-button">Добавить участника</a>
+                        <a href="{% url 'createinvite' group.id %}" class="btn btn-primary card-button">Добавить участника</a>
                     </div>
                 {% else %}
                     <a href="{% url 'delgroup' group.id %}" class="btn btn-danger card-button">Покинуть группу</a>

@@ -2,8 +2,9 @@ from django.urls  import reverse_lazy
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
+from django.contrib.auth.models import User
 from app.users.models import GroupUsers, InviteForGroup
-from app.users.forms import UpdateFormsGroupUsers
+from app.users.forms import UpdateFormsGroupUsers, InviteForGroupForms
 
 
 class SettingPageViews(ListView):
@@ -130,5 +131,22 @@ class DelAndRejectInviteView(DeleteView):
 
 
 class CreateInvite(CreateView):
+    '''
+    Создаем инвайт для юзера 
+    '''
     model = InviteForGroup
-    
+    form_class = InviteForGroupForms
+    success_url = reverse_lazy('listgroup')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['pk'] = self.kwargs['pk']
+        return kwargs
+
+    def form_valid(self, form):
+        print(User.objects.get(username=form.cleaned_data['username']))
+        object_ = InviteForGroup.objects.create(
+            group=GroupUsers.objects.get(pk=self.kwargs['pk']),
+            request_user=User.objects.get(username=form.cleaned_data['username'])
+        )
+        return HttpResponseRedirect(self.success_url)

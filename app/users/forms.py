@@ -1,11 +1,11 @@
 from crispy_forms.layout import Layout, Row, Div, HTML, Submit, Button
 from crispy_forms.helper import FormHelper
 from django import forms
-from django.urls import Http404
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from app.users.models import GroupUsers
+from app.users.models import GroupUsers, InviteForGroup
 
 
 class UpdateFormsGroupUsers(forms.ModelForm):
@@ -81,8 +81,13 @@ class UpdateFormsGroupUsers(forms.ModelForm):
         return instance
 
     
-class InviteForGroupForms(forms.Form):
+class InviteForGroupForms(forms.ModelForm):
     username = forms.CharField(max_length=200)
+
+    
+    class Meta:
+        model = InviteForGroup
+        fields = ['username']
 
     def __init__(self, *args, **kwargs):
         self.pk = kwargs.pop('pk', None)
@@ -117,7 +122,7 @@ class InviteForGroupForms(forms.Form):
         except Http404:
             raise forms.ValidationError({'username': 'Такого пользователя нет'})
         
-        group = GroupUsers.objects.get(pk=self.pk).group_user
+        group = GroupUsers.objects.get(pk=self.pk).group_user.all()
         if user in group:
             raise forms.ValidationError('Пользователь уже есть в этой группе')
         return cleaned_data
