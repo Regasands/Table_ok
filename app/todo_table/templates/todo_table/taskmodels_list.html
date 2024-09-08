@@ -1,0 +1,20 @@
+{% extends 'pattern.html'%}
+{% load static %}
+{% block title %}
+<link rel="stylesheet" href="">
+{% endblock %}
+{% block content %}
+    <ul>
+    {% for task in object_list %}
+        <div
+        class="draggable border-{{task.color_border}} text-{{task.color_text}} background-{{task.background-}}"
+        id="draggable-{{task.id}}">
+        <p>{{task.task}}</p>
+        <h2>{{ task.text_info}}</h2>
+        <h2>{{ task.date }}</h2>
+        </div>
+    {% endfor %}
+
+    </ul>
+
+{% endblock %}

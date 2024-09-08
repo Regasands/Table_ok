@@ -2,7 +2,7 @@ from django.db import models
 from app.users.models import GroupUsers
 
 
-class TeskModels(models.Model):
+class TaskModels(models.Model):
     '''
     Модель задания, плана 
     '''
@@ -23,7 +23,7 @@ class TeskModels(models.Model):
     color_border = models.CharField(verbose_name='Цвет_обводки', choices=ChoiseColor.CHOISE)
     color_text = models.CharField(verbose_name='Цвет_текста', choices=ChoiseColor.CHOISE)
     color_background = models.CharField(verbose_name='Цвет_заднегофона', choices=ChoiseColor.CHOISE)
-    data = models.DateField(auto_now_add=True, verbose_name='Дата создания задания')
+    date = models.DateField(auto_now_add=True, verbose_name='Дата создания задания')
     text_info = models.TextField(max_length=1000, verbose_name='Информация о задание')
     def __str__(self):
         return f'{self.task}'
@@ -39,7 +39,7 @@ class TemaModels(models.Model):
     '''
     name = models.CharField(verbose_name='Название темы', max_length=100)
     group = models.ForeignKey(GroupUsers, on_delete=models.CASCADE, verbose_name='Група  которая имеет эту тему')
-    task = models.ManyToManyField(TeskModels, verbose_name='Задания относящиеся к этой теме ')
+    task = models.ManyToManyField(TaskModels, verbose_name='Задания относящиеся к этой теме ')
 
     def __str__(self):
         return f'{self.name}'
