@@ -1,0 +1,61 @@
+.border-red {
+  border-color: #ff0000;
+}
+
+.border-blue {
+  border-color: #0000ff;
+}
+
+.border-green {
+  border-color: #00ff00;
+}
+
+.border-black {
+  border-color: #000000;
+}
+
+.border-white {
+  border-color: #ffffff;
+}
+
+.text-red {
+  color: #ff0000;
+}
+
+.text-blue {
+  color: #0000ff;
+}
+
+.text-green {
+  color: #00ff00;
+}
+
+.text-black {
+  color: #000000;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.background-red {
+  background-color: #ff0000;
+}
+
+.background-blue {
+  background-color: #0000ff;
+}
+
+.background-green {
+  background-color: #00ff00;
+}
+
+.background-black {
+  background-color: #000000;
+}
+
+.background-white {
+  background-color: #ffffff;
+}
+
+/*# sourceMappingURL=task_color.css.map */
