@@ -18,6 +18,7 @@
 
 }
 .task-block p, .task-block h2 {
+    flex: 1 1 auto;
     font-size: 1rem;
     user-select: none;
 }
@@ -30,4 +31,13 @@
 .resizer {
     margin-left: auto;
     margin-top: auto;
+}
+.date {
+    display: inline-block;
+    margin-bottom: -0.01em;
+    margin-right: auto;
+}
+.text-info {
+    max-height: 60%;
+    overflow: hidden;
 }

@@ -11,9 +11,11 @@
         class="draggable border-{{task.color_border}} text-{{task.color_text}} background-{{task.color_background}} task-block"
         id="draggable-{{task.id}}">
             <p>{{task.task}}</p>
-            <h2>{{ task.text_info}}</h2>
-            <p>{{ task.date }}</p>
-            <i class="bi bi-arrow-down-up resizer"></i>
+            <h2 class="text-info">{{ task.text_info}}</h2>
+            <div class= "d-flex flex-row">
+                <p class="date">{{ task.date }}</p>
+                <i class="bi bi-arrow-down-up resizer"></i>
+            </div>
         </div>
     {% endfor %}
 
