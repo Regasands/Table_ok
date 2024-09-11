@@ -13,7 +13,6 @@
     overflow: hidden;
     word-wrap: break-word;
 
-    text-align: center;
     max-width: 100%;
 
 }
@@ -22,22 +21,21 @@
     font-size: 1rem;
     user-select: none;
 }
-.task-block
-
-/* .task-block:hover{
-    transform: scale(1.3);
-} */
+.task-block p {
+    text-align: center;
+    max-height: 10%;
+}
 
 .resizer {
     margin-left: auto;
     margin-top: auto;
 }
 .date {
-    display: inline-block;
+    text-align: left !important;
+    flex: 0 1 auto;
     margin-bottom: -0.01em;
-    margin-right: auto;
 }
-.text-info {
-    max-height: 60%;
+.text-info-s {
+    max-height: 80%;
     overflow: hidden;
 }

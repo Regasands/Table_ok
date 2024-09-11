@@ -3,6 +3,7 @@ let isResizing = false;
 let draggedElement = null;
 let resizerElement = null;
 let offsetX, offsetY;
+let maxZIndex;
 
 function loadPositions() {
     const elements = document.querySelectorAll('.draggable');
@@ -10,7 +11,9 @@ function loadPositions() {
         const left = localStorage.getItem(`${element.id}-left`);
         const top = localStorage.getItem(`${element.id}-top`);
         const width = localStorage.getItem(`${element.id}-width`);
-        const height = localStorage.getItem(`${element.id}-height`)
+        const height = localStorage.getItem(`${element.id}-height`);
+        const zindex = localStorage.getItem(`${element.id}-zindex`);
+
         console.log(left, top)
         if (left !== null && top !== null) {
             element.style.left = left;
@@ -22,6 +25,9 @@ function loadPositions() {
         if (height !== null){
             element.style.height = height;
         }
+        if (zindex !== null){
+            element.style.zIndex = zindex;
+        }
     });
 }
 
@@ -31,19 +37,35 @@ function savePosition(element) {
     localStorage.setItem(`${element.id}-top`, element.style.top);
     localStorage.setItem(`${element.id}-width`, element.style.width);
     localStorage.setItem(`${element.id}-height`, element.style.height);
+    localStorage.setItem(`${element.id}-zindex`, element.style.zIndex + 1);
 }
 
 function startDragorResizer(e) {
-    if (e.target.classList.contains('draggable')){
-        isDragging = true;
-        draggedElement = e.target;
-
-        offsetX = e.clientX - draggedElement.getBoundingClientRect().left;
-        offsetY = e.clientY - draggedElement.getBoundingClientRect().top;
-    } else if (e.target.classList.contains('resizer')) {
+     if (e.target.classList.contains('resizer')) {
         isResizing = true;
         resizerElement = e.target
         draggedElement = resizerElement.parentElement.parentElement;
+        let maxZIndex = Math.max(...[...document.querySelectorAll('*')].map(el => +getComputedStyle(el).zIndex || 0));
+        if (draggedElement.style.zIndex == maxZIndex){
+            draggedElement.style.zIndex = maxZIndex;
+            } else{
+                draggedElement.style.zIndex = maxZIndex + 1;  
+            }
+
+    }
+    else if (e.target.classList.contains('draggable')  || e.target.closest('.draggable')){
+        isDragging = true;
+        draggedElement = e.target.closest('.draggable');
+        let maxZIndex = Math.max(...[...document.querySelectorAll('*')].map(el => +getComputedStyle(el).zIndex || 0));
+        if (draggedElement.style.zIndex == maxZIndex){
+        draggedElement.style.zIndex = maxZIndex;
+        } else{
+            draggedElement.style.zIndex = maxZIndex + 1;  
+        }
+
+
+        offsetX = e.clientX - draggedElement.getBoundingClientRect().left;
+        offsetY = e.clientY - draggedElement.getBoundingClientRect().top;
 
     }
 }
@@ -77,6 +99,7 @@ function stopDragorResize(){
         resizerElement = null;
         isDragging = false;
         isResizing = false;
+        maxZIndex = null;
 
     }
 }
