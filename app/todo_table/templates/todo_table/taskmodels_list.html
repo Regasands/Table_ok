@@ -3,20 +3,34 @@
 {% block title %}
 <link rel="stylesheet" href="{% static 'css/task_color.css'%}">
 <link rel="stylesheet" href="{% static 'css/task_block.css'%}">
+<link rel="stylesheet" href="{% static 'css/task_filter_block.css'%}">
 {% endblock %}
 {% block content %}
+    <select id="group-select">
+        {% for group in all_group %}
+        <option value="{{ group.pk }}">{{ group }}</option>
+        {% endfor %}
+    </select>
+
+    <select id="team-select">
+        <option value="all" class="visibale_block" data-group="all">Все</option>
+        {% for team in all_team %}
+        <option value="{{ team.pk}}" data-group="{{ team.group.pk }}">{{ team }}</option>
+        {% endfor %}
+    </select>
+    <script src="{% static 'js/filter.js'%}"></script>
     <div class="p-5">
     {% for task in object_list %}
-        <div
-        class="draggable border-{{task.color_border}} text-{{task.color_text}} background-{{task.color_background}} task-block p-2"
-        id="draggable-{{task.id}}">
-            <p>{{task.task}}</p>
-            <h2 class="text-info-s">{{ task.text_info}}</h2>
-            <div class= "d-flex flex-row justify-content-between w-auto">
-                <p class="date">{{ task.date }}</p>
-                <i class="bi bi-arrow-down-up resizer"></i>
+            <div
+            class="draggable border-{{task.color_border}} text-{{task.color_text}} background-{{task.color_background}} task-block p-2"
+            id="draggable-{{task.id}}" data-item="{{ task.team.pk}}" data-group="{{ task.team.group.pk}}">
+                <p>{{task}}</p>
+                <h2 class="text-info-s">{{ task.text_info}}</h2>
+                <div class= "d-flex flex-row justify-content-between w-auto">
+                    <p class="date">{{ task.date }}</p>
+                    <i class="bi bi-arrow-down-up resizer"></i>
+                </div>
             </div>
-        </div>
     {% endfor %}
 
     </div>

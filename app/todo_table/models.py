@@ -2,6 +2,21 @@ from django.db import models
 from app.users.models import GroupUsers
 
 
+class TemaModels(models.Model):
+    '''
+    Тема для задания , объеденяет несколько заданий
+    '''
+    name = models.CharField(verbose_name='Название темы', max_length=100)
+    group = models.ForeignKey(GroupUsers, on_delete=models.CASCADE, verbose_name='Група  которая имеет эту тему')
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        verbose_name = 'Тема'
+        verbose_name_plural = 'Темы'
+
+
 class TaskModels(models.Model):
     '''
     Модель задания, плана 
@@ -25,26 +40,10 @@ class TaskModels(models.Model):
     color_background = models.CharField(verbose_name='Цвет_заднегофона', choices=ChoiseColor.CHOISE)
     date = models.DateField(auto_now_add=True, verbose_name='Дата создания задания')
     text_info = models.TextField(max_length=1000, verbose_name='Информация о задание')
+    team = models.ForeignKey(TemaModels, verbose_name='Задания относящиеся к этой теме', on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.task}'
 
     class Meta:
         verbose_name = 'Задание'
         verbose_name_plural = 'Задания '
-
-
-class TemaModels(models.Model):
-    '''
-    Тема для задания , объеденяет несколько заданий
-    '''
-    name = models.CharField(verbose_name='Название темы', max_length=100)
-    group = models.ForeignKey(GroupUsers, on_delete=models.CASCADE, verbose_name='Група  которая имеет эту тему')
-    task = models.ManyToManyField(TaskModels, verbose_name='Задания относящиеся к этой теме ')
-
-    def __str__(self):
-        return f'{self.name}'
-
-    class Meta:
-        verbose_name = 'Тема'
-        verbose_name_plural = 'Темы'
-        # Create your models her
